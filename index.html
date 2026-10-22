@@ -84,6 +84,10 @@ h2{font-family:var(--f-script);font-weight:400;font-size:clamp(44px,12vw,58px);l
 .flourish{display:block;width:180px;max-width:60%;height:auto;margin:16px auto 0}
 @media (max-width:400px){.frame{padding-inline:16px}.frame .cl.tl,.frame .cl.tr{width:126px;top:30px}.frame .cl.tl{left:-28px}.frame .cl.tr{right:-28px}.frame .cl.bl,.frame .cl.br{width:115px}}
 
+.cd-sec{padding-block:40px 0}
+.cd-panel{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:30px 16px 28px;box-shadow:var(--shadow);display:grid;justify-items:center;gap:2px}
+.cd-panel .countdown{margin-top:22px}
+.cd-date{margin:18px 0 0;font-family:var(--f-label);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 /* ---------- divider ---------- */
 .vine{display:block;width:220px;max-width:70%;height:auto;margin:0 auto;color:var(--leaf)}
 
@@ -275,17 +279,27 @@ footer .mono{font-family:var(--f-script);font-size:46px;color:var(--fern);line-h
       <span class="side">Friday</span><span class="day">22</span><span class="side">Jan 2027</span>
     </div>
     <p class="where">Malolos City, Bulacan</p>
-    <div class="countdown" id="cd" aria-live="off">
-      <div><b id="cd-d">--</b><span>Days</span></div>
-      <div><b id="cd-h">--</b><span>Hours</span></div>
-      <div><b id="cd-m">--</b><span>Mins</span></div>
-      <div><b id="cd-s">--</b><span>Secs</span></div>
-    </div>
    </div>
   </div>
 </header>
 
 <main>
+  <section id="countdown" class="cd-sec">
+    <div class="wrap">
+      <div class="cd-panel">
+        <svg class="vine" viewBox="0 0 220 30" aria-hidden="true"><path d="M4 15H88M132 15H216" stroke="currentColor" stroke-width="1"/><use href="#leaf" x="70" y="9" width="22" height="11" transform="rotate(-20 81 14)"/><use href="#leaf" x="128" y="9" width="22" height="11" transform="rotate(200 139 15)"/><use href="#rose" x="96" y="1" width="28" height="28"/></svg>
+        <span class="label">Counting the Days</span>
+        <h2>Until We Say “I Do”</h2>
+        <div class="countdown" id="cd" aria-live="off">
+          <div><b id="cd-d">--</b><span>Days</span></div>
+          <div><b id="cd-h">--</b><span>Hours</span></div>
+          <div><b id="cd-m">--</b><span>Mins</span></div>
+          <div><b id="cd-s">--</b><span>Secs</span></div>
+        </div>
+        <p class="cd-date">Friday · January 22, 2027</p>
+      </div>
+    </div>
+  </section>
   <section id="details">
     <div class="wrap wide">
       <svg class="vine" viewBox="0 0 220 30" aria-hidden="true"><path d="M4 15H88M132 15H216" stroke="currentColor" stroke-width="1"/><use href="#leaf" x="70" y="9" width="22" height="11" transform="rotate(-20 81 14)"/><use href="#leaf" x="128" y="9" width="22" height="11" transform="rotate(200 139 15)"/><use href="#daisy" x="96" y="1" width="28" height="28"/></svg>

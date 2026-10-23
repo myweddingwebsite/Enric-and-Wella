@@ -33,7 +33,7 @@
 html{scroll-behavior:smooth;scroll-padding-top:12px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{background:var(--paper);color:var(--ink);font-family:var(--f-serif);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;
-  padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  padding-bottom:env(safe-area-inset-bottom,0px)}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--leaf);outline-offset:3px;border-radius:6px}
 
@@ -81,7 +81,7 @@ h2.one{white-space:nowrap;font-size:clamp(26px,8.2vw,58px)}
 .frame .cl.bl{width:140px;bottom:-34px;left:-30px;transform:rotate(-100deg)}
 .frame .cl.br{width:140px;bottom:-34px;right:-30px;transform:scaleX(-1) rotate(-100deg)}
 .frame .crown{position:absolute;top:-30px;left:50%;width:210px;margin-left:-105px;pointer-events:none;height:auto}
-.hero{padding-top:52px}
+.hero{padding-top:92px}
 .flourish{display:block;width:180px;max-width:60%;height:auto;margin:16px auto 0}
 @media (max-width:400px){.frame{padding-inline:16px}.frame .cl.tl,.frame .cl.tr{width:126px;top:30px}.frame .cl.tl{left:-28px}.frame .cl.tr{right:-28px}.frame .cl.bl,.frame .cl.br{width:115px}}
 
@@ -191,16 +191,28 @@ h2.one{white-space:nowrap;font-size:clamp(26px,8.2vw,58px)}
 footer{text-align:center;padding-block:48px 24px;color:var(--muted);font-size:15px}
 footer .mono{font-family:var(--f-script);font-size:46px;color:var(--fern);line-height:1}
 
-/* ---------- bottom nav ---------- */
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;
-  padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));
-  pointer-events:none}
-.nav ul{pointer-events:auto;list-style:none;margin:0;padding:6px;display:flex;gap:2px;background:color-mix(in srgb,var(--card) 92%,transparent);
-  border:1px solid var(--line);border-radius:999px;box-shadow:0 12px 30px -12px rgba(60,60,20,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);max-width:100%}
-.nav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 13px;border-radius:999px;text-decoration:none;
-  font-family:var(--f-label);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
-.nav a.on{background:var(--fern);color:var(--paper)}
-@media (max-width:370px){.nav a{padding:0 10px;font-size:10.5px;letter-spacing:.08em}}
+/* ---------- top bar + hamburger menu ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--paper)}
+.topbar{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;justify-content:space-between;
+  padding:8px max(12px,env(safe-area-inset-right,0px)) 8px max(12px,env(safe-area-inset-left,0px));transition:background .3s,box-shadow .3s}
+.topbar.solid{background:color-mix(in srgb,var(--paper) 94%,transparent);box-shadow:0 1px 0 var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.tb-mono{font-family:var(--f-script);font-size:30px;line-height:1;color:var(--fern);text-decoration:none;padding:6px 8px 2px;opacity:0;transition:opacity .3s}
+.topbar.solid .tb-mono{opacity:1}
+.burger{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 85%,transparent);display:grid;place-items:center;cursor:pointer;color:var(--fern)}
+.burger i,.burger i::before,.burger i::after{content:"";display:block;width:20px;height:1.5px;background:currentColor;border-radius:2px;position:relative}
+.burger i::before{position:absolute;top:-6px}.burger i::after{position:absolute;top:6px;width:13px;right:0;left:auto}
+.menu{position:fixed;inset:0;z-index:40;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  padding:calc(24px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.menu.show{opacity:1;visibility:visible}
+.menu .m-mono{font-family:var(--f-script);font-size:58px;line-height:1.1;color:var(--fern);margin-bottom:6px}
+.menu .m-vine{width:150px;height:auto;margin:0 auto 14px;color:var(--leaf)}
+.menu a{font-family:var(--f-serif);font-style:italic;font-size:25px;line-height:1.3;color:var(--ink);text-decoration:none;padding:7px 24px;border-radius:999px}
+.menu a:hover,.menu a:focus-visible{color:var(--fern);background:var(--petal)}
+.menu .close{position:absolute;top:calc(8px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fern);font-size:28px;line-height:1;cursor:pointer}
+.menu .m-date{margin-top:18px;font-family:var(--f-label);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+body.menu-open{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.topbar,.menu,.tb-mono{transition:none}}
 </style>
 </head>
 <body>
@@ -497,13 +509,21 @@ footer .mono{font-family:var(--f-script);font-size:46px;color:var(--fern);line-h
   </div>
 </footer>
 
-<nav class="nav" aria-label="Sections">
-  <ul>
-    <li><a href="#details" data-s="details">Details</a></li>
-    <li><a href="#entourage" data-s="entourage">Entourage</a></li>
-    <li><a href="#attire" data-s="attire">Attire</a></li>
-    <li><a href="#rsvp" data-s="rsvp">RSVP</a></li>
-  </ul>
+<header class="topbar" id="topbar">
+  <a href="#home" class="tb-mono" aria-label="Back to top">E&amp;W</a>
+  <button class="burger" id="menuBtn" type="button" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><i></i></button>
+</header>
+<nav class="menu" id="menu" aria-label="Sections" aria-hidden="true">
+  <button class="close" id="menuClose" type="button" aria-label="Close menu">&times;</button>
+  <div class="m-mono">Enric &amp; Wella</div>
+  <svg class="m-vine" viewBox="0 0 220 30" aria-hidden="true"><path d="M4 15H88M132 15H216" stroke="currentColor" stroke-width="1"/><use href="#leaf" x="70" y="9" width="22" height="11" transform="rotate(-20 81 14)"/><use href="#leaf" x="128" y="9" width="22" height="11" transform="rotate(200 139 15)"/><use href="#daisy" x="96" y="1" width="28" height="28"/></svg>
+  <a href="#home">Home</a>
+  <a href="#countdown">Countdown</a>
+  <a href="#details">The Celebration</a>
+  <a href="#entourage">Entourage</a>
+  <a href="#attire">Dress Code</a>
+  <a href="#rsvp">RSVP</a>
+  <p class="m-date">January 22, 2027 · Malolos, Bulacan</p>
 </nav>
 
 <script>
@@ -558,17 +578,20 @@ const RSVP_URL = "https://script.google.com/macros/s/AKfycbwVnaRndvlJ4Ru-gzns23N
   }
   const t = setInterval(tick,1000); tick();
 
-  // Highlight current section in bottom nav
-  const links = [...document.querySelectorAll(".nav a")];
-  const ids = links.map(a => a.dataset.s);
-  function spy(){
-    const y = window.scrollY + window.innerHeight*0.35;
-    let cur = null;
-    for (const id of ids){ const el = document.getElementById(id); if (el && el.offsetTop <= y) cur = id; }
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) cur = ids[ids.length-1];
-    links.forEach(a => a.classList.toggle("on", a.dataset.s === cur));
+  // Top bar + hamburger menu
+  const bar = document.getElementById("topbar"), menu = document.getElementById("menu"),
+        openB = document.getElementById("menuBtn"), closeB = document.getElementById("menuClose");
+  function setMenu(open){
+    menu.classList.toggle("show", open); menu.setAttribute("aria-hidden", String(!open));
+    openB.setAttribute("aria-expanded", String(open)); document.body.classList.toggle("menu-open", open);
+    (open ? closeB : openB).focus({preventScroll:true});
   }
-  addEventListener("scroll", spy, {passive:true}); addEventListener("resize", spy); spy();
+  openB.addEventListener("click", () => setMenu(true));
+  closeB.addEventListener("click", () => setMenu(false));
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+  addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("show")) setMenu(false); });
+  const onScroll = () => bar.classList.toggle("solid", window.scrollY > 40);
+  addEventListener("scroll", onScroll, {passive:true}); onScroll();
 })();
 </script>
 

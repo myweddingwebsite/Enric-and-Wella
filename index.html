@@ -53,9 +53,11 @@ h2.one{white-space:nowrap;font-size:clamp(26px,8.2vw,58px)}
 .names{font-family:var(--f-script);color:var(--fern);font-size:clamp(50px,15vw,84px);line-height:1;margin:14px 0 4px;font-weight:400}
 .names .amp{display:block;font-size:.55em;color:var(--butter);margin:4px 0 2px;filter:saturate(1.1)}
 .fullnames{font-family:var(--f-label);letter-spacing:.12em;text-transform:uppercase;font-size:12.5px;color:var(--muted);margin:14px 0 0;line-height:1.9}
-.datebox{display:inline-grid;grid-template-columns:auto auto auto;align-items:center;gap:14px;margin:26px auto 4px;color:var(--fern)}
-.datebox .side{font-family:var(--f-label);letter-spacing:.2em;text-transform:uppercase;font-size:12px;border-block:1px solid var(--line);padding:6px 2px;min-width:78px}
-.datebox .day{font-family:var(--f-serif);font-size:54px;line-height:1;font-weight:500}
+.datebox{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:16px;row-gap:10px;width:100%;max-width:330px;margin:24px auto 4px;color:var(--fern)}
+.datebox .month,.datebox .year{grid-column:1/-1;font-family:var(--f-label);text-transform:uppercase;letter-spacing:.42em;padding-left:.42em;font-size:15px;line-height:1}
+.datebox .side{font-family:var(--f-label);letter-spacing:.24em;padding-left:.24em;text-transform:uppercase;font-size:12.5px;white-space:nowrap;border-block:1px solid var(--leaf);padding-block:9px}
+.datebox .day{font-family:var(--f-serif);font-size:56px;line-height:1;font-weight:500}
+@media (max-width:380px){.datebox{column-gap:10px}.datebox .side{letter-spacing:.16em;padding-left:.16em;font-size:11.5px}.datebox .day{font-size:48px}}
 .hero .where{margin:6px 0 0;font-family:var(--f-label);letter-spacing:.14em;font-size:12.5px;text-transform:uppercase;color:var(--muted)}
 
 .countdown{display:flex;justify-content:center;gap:8px;margin:28px 0 0;font-variant-numeric:tabular-nums}
@@ -475,8 +477,10 @@ body.locked{overflow:hidden;height:100vh;height:100dvh}
     <h1 class="names">Enric<span class="amp">&amp;</span>Wella</h1>
     <svg class="flourish" viewBox="0 0 180 14" aria-hidden="true"><path d="M2 7C30 7 50 2 70 7S88 12 90 7 110 2 130 7 160 7 178 7" fill="none" stroke="var(--leaf)" stroke-width=".9"/><circle cx="90" cy="7" r="2.6" fill="var(--butter)"/></svg>
     <p class="together" style="margin-top:14px">invite you to celebrate our wedding</p>
-    <div class="datebox" aria-label="Friday, January 22, 2027">
-      <span class="side">Friday</span><span class="day">22</span><span class="side">Jan 2027</span>
+    <div class="datebox" aria-label="Friday, January 22, 2027 at 9 AM">
+      <span class="month">January</span>
+      <span class="side">Friday</span><span class="day">22</span><span class="side">At 9 AM</span>
+      <span class="year">2027</span>
     </div>
     <p class="where">Malolos City, Bulacan</p>
    </div>
